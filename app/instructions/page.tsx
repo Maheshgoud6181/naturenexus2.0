@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import confetti from "canvas-confetti";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -57,6 +58,25 @@ export default function InstructionsPage() {
     };
 
     fetchUser();
+    confetti({
+      particleCount: 150,
+      spread: 120,
+      startVelocity: 40,
+      gravity: 1,
+      ticks: 300,
+      scalar: 1.0,
+      shapes: ["square"],
+      origin: { y: 0.2 },
+      colors: [
+        "#ef4444",
+        "#f97316",
+        "#eab308",
+        "#22c55e",
+        "#3b82f6",
+        "#8b5cf6",
+        "#ec4899",
+      ],
+    });
   }, [router]);
 
   // ---------------- CHECK EVENT TIME ----------------

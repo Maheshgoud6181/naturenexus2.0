@@ -1,5 +1,6 @@
 "use client";
 
+import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -112,6 +113,42 @@ export default function ResultsPage() {
 
     loadResults();
   }, [router]);
+
+  useEffect(() => {
+    if (!loading && userData && scoreData) {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0 },
+        colors: ["#22c55e", "#16a34a", "#4ade80", "#86efac", "#bbf7d0"],
+      });
+
+      const duration = 3000;
+      const end = Date.now() + duration;
+
+      const interval = setInterval(() => {
+        if (Date.now() > end) {
+          clearInterval(interval);
+          return;
+        }
+
+        confetti({
+          particleCount: 8,
+          startVelocity: 0,
+          spread: 360,
+          ticks: 200,
+          gravity: 0.8,
+          origin: {
+            x: Math.random(),
+            y: 0,
+          },
+          colors: ["#22c55e", "#16a34a", "#4ade80"],
+        });
+      }, 200);
+
+      return () => clearInterval(interval);
+    }
+  }, [loading, userData, scoreData]);
 
   if (loading || !userData || !scoreData) {
     return (

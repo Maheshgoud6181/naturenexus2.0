@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Leaf, Trophy, Clock, Target, Sparkles, Users } from "lucide-react"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Leaf, Trophy, Clock, Target, Sparkles, Users } from "lucide-react";
 
 export default function HomePage() {
-  const [scrollY, setScrollY] = useState(0)
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <main className="min-h-screen">
@@ -31,22 +31,36 @@ export default function HomePage() {
         <div
           className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.08),transparent_70%)]"
           style={{
-            transform: `translateY(${scrollY * 0.3}px) scale(${1 + scrollY * 0.0002})`,
+            transform: `translateY(${scrollY * 0.3}px) scale(${
+              1 + scrollY * 0.0002
+            })`,
             transition: "transform 0.1s ease-out",
           }}
         />
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-[10%] animate-float" style={{ animationDelay: "0s" }}>
+          <div
+            className="absolute top-20 left-[10%] animate-float"
+            style={{ animationDelay: "0s" }}
+          >
             <Leaf className="h-8 w-8 text-primary/20" />
           </div>
-          <div className="absolute top-40 right-[15%] animate-float" style={{ animationDelay: "2s" }}>
+          <div
+            className="absolute top-40 right-[15%] animate-float"
+            style={{ animationDelay: "2s" }}
+          >
             <Leaf className="h-6 w-6 text-secondary/20" />
           </div>
-          <div className="absolute top-60 left-[20%] animate-float" style={{ animationDelay: "4s" }}>
+          <div
+            className="absolute top-60 left-[20%] animate-float"
+            style={{ animationDelay: "4s" }}
+          >
             <Leaf className="h-10 w-10 text-primary/15" />
           </div>
-          <div className="absolute top-32 right-[25%] animate-float" style={{ animationDelay: "1s" }}>
+          <div
+            className="absolute top-32 right-[25%] animate-float"
+            style={{ animationDelay: "1s" }}
+          >
             <Leaf className="h-7 w-7 text-secondary/25" />
           </div>
         </div>
@@ -103,11 +117,15 @@ export default function HomePage() {
       {/* About Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="mx-auto max-w-3xl text-center animate-on-scroll">
-          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">About the Challenge</h2>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            About the Challenge
+          </h2>
           <p className="text-balance text-lg leading-relaxed text-muted-foreground">
-            NATURE NEXUS 2.0 is an exciting environmental quiz competition designed to test your knowledge about
-            ecology, sustainability, and environmental conservation. Challenge yourself through 6 engaging levels and
-            compete with fellow participants to claim the top spot on the leaderboard!
+            NATURE NEXUS 2.0 is an exciting environmental quiz competition
+            designed to test your knowledge about ecology, sustainability, and
+            environmental conservation. Challenge yourself through 6 engaging
+            levels and compete with fellow participants to claim the top spot on
+            the leaderboard!
           </p>
         </div>
       </section>
@@ -116,7 +134,9 @@ export default function HomePage() {
       <section className="bg-muted/50 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Event Details</h2>
+            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+              Event Details
+            </h2>
           </div>
 
           <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
@@ -125,7 +145,9 @@ export default function HomePage() {
                 <div className="mb-4 rounded-full bg-primary/10 p-3 group-hover:scale-110 transition-transform">
                   <Clock className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-card-foreground">Duration</h3>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">
+                  Duration
+                </h3>
                 <p className="text-muted-foreground">2 Hours</p>
               </CardContent>
             </Card>
@@ -138,7 +160,9 @@ export default function HomePage() {
                 <div className="mb-4 rounded-full bg-secondary/10 p-3">
                   <Target className="h-8 w-8 text-secondary" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-card-foreground">Levels</h3>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">
+                  Levels
+                </h3>
                 <p className="text-muted-foreground">6 Challenging Rounds</p>
               </CardContent>
             </Card>
@@ -151,7 +175,9 @@ export default function HomePage() {
                 <div className="mb-4 rounded-full bg-accent/10 p-3">
                   <Users className="h-8 w-8 text-accent" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-card-foreground">Competition</h3>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">
+                  Competition
+                </h3>
                 <p className="text-muted-foreground">Live Leaderboard</p>
               </CardContent>
             </Card>
@@ -162,8 +188,12 @@ export default function HomePage() {
       {/* Scoring System */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Scoring System</h2>
-          <p className="text-lg text-muted-foreground">Earn points for correct answers and speed bonuses</p>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            Scoring System
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Earn points for correct answers and speed bonuses
+          </p>
         </div>
 
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
@@ -173,10 +203,13 @@ export default function HomePage() {
                 <div className="rounded-lg bg-primary/10 p-2">
                   <Trophy className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold text-card-foreground">Base Points</h3>
+                <h3 className="text-lg font-semibold text-card-foreground">
+                  Base Points
+                </h3>
               </div>
               <p className="text-muted-foreground">
-                Earn points for every correct answer. Different levels have different point values based on difficulty.
+                Earn points for every correct answer. Different levels have
+                different point values based on difficulty.
               </p>
             </CardContent>
           </Card>
@@ -190,10 +223,13 @@ export default function HomePage() {
                 <div className="rounded-lg bg-secondary/10 p-2">
                   <Clock className="h-5 w-5 text-secondary" />
                 </div>
-                <h3 className="text-lg font-semibold text-card-foreground">Time Bonus</h3>
+                <h3 className="text-lg font-semibold text-card-foreground">
+                  Time Bonus
+                </h3>
               </div>
               <p className="text-muted-foreground">
-                Complete levels faster to earn time bonus points. Speed and accuracy both matter!
+                Complete levels faster to earn time bonus points. Speed and
+                accuracy both matter!
               </p>
             </CardContent>
           </Card>
@@ -204,8 +240,12 @@ export default function HomePage() {
       <section className="bg-muted/50 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Quiz Levels</h2>
-            <p className="text-lg text-muted-foreground">Progress through 6 unique challenge formats</p>
+            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+              Quiz Levels
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Progress through 6 unique challenge formats
+            </p>
           </div>
 
           <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -225,7 +265,8 @@ export default function HomePage() {
               {
                 level: 3,
                 title: "Match & Sequence",
-                description: "Test your logical thinking and pattern recognition",
+                description:
+                  "Test your logical thinking and pattern recognition",
                 icon: "🧩",
               },
               {
@@ -259,8 +300,12 @@ export default function HomePage() {
                       Level {level.level}
                     </div>
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-card-foreground">{level.title}</h3>
-                  <p className="text-sm text-muted-foreground">{level.description}</p>
+                  <h3 className="mb-2 text-lg font-semibold text-card-foreground">
+                    {level.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {level.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -272,7 +317,9 @@ export default function HomePage() {
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="mx-auto max-w-3xl">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Rules & Guidelines</h2>
+            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+              Rules & Guidelines
+            </h2>
           </div>
 
           <Card className="border-2 animate-on-scroll">
@@ -294,7 +341,9 @@ export default function HomePage() {
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                      <span className="text-xs font-semibold text-primary">{index + 1}</span>
+                      <span className="text-xs font-semibold text-primary">
+                        {index + 1}
+                      </span>
                     </div>
                     <span className="text-muted-foreground">{rule}</span>
                   </li>
@@ -308,10 +357,17 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-16 md:py-24">
         <div className="container mx-auto px-4 text-center animate-on-scroll">
-          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Ready to Test Your Knowledge?</h2>
-          <p className="mb-8 text-lg text-muted-foreground">Register now and compete for the top spot!</p>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            Ready to Test Your Knowledge?
+          </h2>
+          <p className="mb-8 text-lg text-muted-foreground">
+            Register now and compete for the top spot!
+          </p>
           <Link href="/register">
-            <Button size="lg" className="h-14 px-10 text-lg font-semibold group hover:scale-105 transition-transform">
+            <Button
+              size="lg"
+              className="h-14 px-10 text-lg font-semibold group hover:scale-105 transition-transform"
+            >
               Register Now
               <Sparkles className="ml-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
             </Button>
@@ -324,11 +380,15 @@ export default function HomePage() {
         <div className="container mx-auto px-4 text-center">
           <div className="mb-4 flex items-center justify-center gap-2">
             <Leaf className="h-5 w-5 text-primary" />
-            <p className="text-lg font-semibold text-foreground">Prakriti – The Techno Environmental Club</p>
+            <p className="text-lg font-semibold text-foreground">
+              Prakriti – The Techno Environmental Club
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground">© 2025 Nature Nexus 2.0. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">
+            © 2025 Nature Nexus 2.0. All rights reserved.
+          </p>
         </div>
       </footer>
     </main>
-  )
+  );
 }
