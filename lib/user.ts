@@ -18,10 +18,10 @@ export async function createUser(
   rollNumber: string,
   phoneNumber: string
 ): Promise<string> {
-  // 1️⃣ Ensure auth FIRST
+ 
   const uid = await anonymousLogin()
 
-  // 2️⃣ Duplicate roll number check
+  
   const rollQuery = query(
     collection(db, "users"),
     where("rollNumber", "==", rollNumber)
@@ -33,12 +33,12 @@ export async function createUser(
     throw new Error("ROLL_ALREADY_EXISTS")
   }
 
-  // 3️⃣ Create user document
+  
   await setDoc(doc(db, "users", uid), {
     fullName,
     rollNumber,
     phoneNumber,
-    agreedToRules: false, // ✅ REQUIRED
+    agreedToRules: false,
     quizStarted: false,
     quizCompleted: false,
     createdAt: serverTimestamp(),
