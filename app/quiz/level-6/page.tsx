@@ -1,62 +1,74 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Leaf, Upload, Instagram, Facebook, CheckCircle2, Loader2 } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Leaf,
+  Upload,
+  Instagram,
+  Facebook,
+  CheckCircle2,
+  Loader2,
+} from "lucide-react";
 
 export default function Level6Page() {
-  const router = useRouter()
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-  const [isUploading, setIsUploading] = useState(false)
+  const router = useRouter();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [completedTasks, setCompletedTasks] = useState({
     instagram: false,
     facebook: false,
     screenshot: false,
-  })
+  });
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
+    const file = e.target.files?.[0];
     if (file) {
-      setSelectedFile(file)
-      const url = URL.createObjectURL(file)
-      setPreviewUrl(url)
-      setCompletedTasks((prev) => ({ ...prev, screenshot: true }))
+      setSelectedFile(file);
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+      setCompletedTasks((prev) => ({ ...prev, screenshot: true }));
     }
-  }
+  };
 
   const handleSubmit = async () => {
-    if (!selectedFile) return
+    if (!selectedFile) return;
 
-    setIsUploading(true)
+    setIsUploading(true);
 
     // TODO: Upload screenshot to Firebase Storage
     // TODO: Save proof URL to Firestore
     // TODO: Award bonus points for completion
 
     // Simulate upload
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Save bonus level completion
-    const existingScores = JSON.parse(localStorage.getItem("levelScores") || "{}")
-    existingScores["level6"] = { score: 50, timeBonus: 10 } // Bonus points
-    localStorage.setItem("levelScores", JSON.stringify(existingScores))
+    const existingScores = JSON.parse(
+      localStorage.getItem("levelScores") || "{}"
+    );
+    existingScores["level6"] = { score: 50, timeBonus: 10 }; // Bonus points
+    localStorage.setItem("levelScores", JSON.stringify(existingScores));
 
     // Mark quiz as complete
-    localStorage.setItem("quizCompleted", "true")
+    localStorage.setItem("quizCompleted", "true");
 
-    setIsUploading(false)
+    setIsUploading(false);
 
     // Navigate to results
-    router.push("/results")
-  }
+    router.push("/results");
+  };
 
-  const allTasksCompleted = completedTasks.instagram && completedTasks.facebook && completedTasks.screenshot
+  const allTasksCompleted =
+    completedTasks.instagram &&
+    completedTasks.facebook &&
+    completedTasks.screenshot;
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-12">
@@ -70,16 +82,23 @@ export default function Level6Page() {
               <Leaf className="h-4 w-4" />
               <span>NATURE NEXUS 2.0</span>
             </div>
-            <h1 className="mb-2 text-3xl font-bold text-foreground">Level 6: Bonus Challenge</h1>
-            <p className="text-muted-foreground">Complete social media tasks for bonus points</p>
+            <h1 className="mb-2 text-3xl font-bold text-foreground">
+              Level 6: Bonus Challenge
+            </h1>
+            <p className="text-muted-foreground">
+              Complete social media tasks for bonus points
+            </p>
           </div>
 
           {/* Instructions Card */}
           <Card className="mb-6 border-2 shadow-lg">
             <CardContent className="p-8">
-              <h2 className="mb-4 text-xl font-semibold text-foreground">Complete These Tasks</h2>
+              <h2 className="mb-4 text-xl font-semibold text-foreground">
+                Complete These Tasks
+              </h2>
               <p className="mb-6 text-muted-foreground">
-                Follow our social media accounts and upload a screenshot to earn 50 bonus points!
+                Follow our social media accounts and upload a screenshot to earn
+                50 bonus points!
               </p>
 
               <div className="space-y-6">
@@ -97,14 +116,24 @@ export default function Level6Page() {
                     )}
                   </div>
                   <div className="flex-1">
-                    <h3 className="mb-1 font-semibold text-card-foreground">Follow on Instagram</h3>
-                    <p className="mb-3 text-sm text-muted-foreground">Follow @prakriti_environmental on Instagram</p>
+                    <h3 className="mb-1 font-semibold text-card-foreground">
+                      Follow on Instagram
+                    </h3>
+                    <p className="mb-3 text-sm text-muted-foreground">
+                      Follow @prakriti_environmental on Instagram
+                    </p>
                     <Button
                       variant={completedTasks.instagram ? "outline" : "default"}
                       size="sm"
                       onClick={() => {
-                        setCompletedTasks((prev) => ({ ...prev, instagram: true }))
-                        window.open("https://instagram.com", "_blank")
+                        setCompletedTasks((prev) => ({
+                          ...prev,
+                          instagram: true,
+                        }));
+                        window.open(
+                          "https://www.instagram.com/prakriti.nitdgp?igsh=ZWdkZ2t5OXc0am41",
+                          "_blank"
+                        );
                       }}
                     >
                       {completedTasks.instagram ? "Followed" : "Follow Now"}
@@ -126,14 +155,24 @@ export default function Level6Page() {
                     )}
                   </div>
                   <div className="flex-1">
-                    <h3 className="mb-1 font-semibold text-card-foreground">Like on Facebook</h3>
-                    <p className="mb-3 text-sm text-muted-foreground">Like our Facebook page @PrakritiClub</p>
+                    <h3 className="mb-1 font-semibold text-card-foreground">
+                      Follow on Facebook
+                    </h3>
+                    <p className="mb-3 text-sm text-muted-foreground">
+                      Follow @prakriti_environmental on Facebook
+                    </p>
                     <Button
                       variant={completedTasks.facebook ? "outline" : "default"}
                       size="sm"
                       onClick={() => {
-                        setCompletedTasks((prev) => ({ ...prev, facebook: true }))
-                        window.open("https://facebook.com", "_blank")
+                        setCompletedTasks((prev) => ({
+                          ...prev,
+                          facebook: true,
+                        }));
+                        window.open(
+                          "https://www.facebook.com/share/12LRAGuPKA9/?mibextid=wwXIfr",
+                          "_blank"
+                        );
                       }}
                     >
                       {completedTasks.facebook ? "Liked" : "Like Now"}
@@ -155,9 +194,11 @@ export default function Level6Page() {
                     )}
                   </div>
                   <div className="flex-1">
-                    <h3 className="mb-1 font-semibold text-card-foreground">Upload Screenshot</h3>
+                    <h3 className="mb-1 font-semibold text-card-foreground">
+                      Upload Screenshot
+                    </h3>
                     <p className="mb-3 text-sm text-muted-foreground">
-                      Upload a screenshot showing both accounts followed
+                      Upload any one screenshot showing account followed
                     </p>
                     <div className="space-y-3">
                       <Label htmlFor="screenshot" className="sr-only">
@@ -172,7 +213,11 @@ export default function Level6Page() {
                       />
                       {previewUrl && (
                         <div className="overflow-hidden rounded-lg border-2 border-primary/20">
-                          <img src={previewUrl || "/placeholder.svg"} alt="Screenshot preview" className="w-full" />
+                          <img
+                            src={previewUrl || "/placeholder.svg"}
+                            alt="Screenshot preview"
+                            className="w-full"
+                          />
                         </div>
                       )}
                     </div>
@@ -190,15 +235,24 @@ export default function Level6Page() {
                   <Leaf className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-card-foreground">Bonus Reward</h3>
-                  <p className="text-sm text-muted-foreground">Complete all tasks to earn 50 bonus points!</p>
+                  <h3 className="font-semibold text-card-foreground">
+                    Bonus Reward
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Complete all tasks to earn 50 bonus points!
+                  </p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Submit Button */}
-          <Button onClick={handleSubmit} disabled={!allTasksCompleted || isUploading} className="w-full" size="lg">
+          <Button
+            onClick={handleSubmit}
+            disabled={!allTasksCompleted || isUploading}
+            className="w-full"
+            size="lg"
+          >
             {isUploading ? (
               <>
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -211,5 +265,5 @@ export default function Level6Page() {
         </div>
       </div>
     </main>
-  )
+  );
 }
