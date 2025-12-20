@@ -1,24 +1,26 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { QuizEngine } from "@/components/quiz-engine"
-import { level5Questions } from "@/lib/quiz-data"
-import { Leaf } from "lucide-react"
+import { useRouter } from "next/navigation";
+import { QuizEngine } from "@/components/quiz-engine";
+import { level5Questions } from "@/lib/quiz-data";
+import { Leaf } from "lucide-react";
 
 export default function Level5Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleComplete = (score: number, timeBonus: number) => {
     // TODO: Save Level 5 score and time bonus to Firestore
 
     // Store locally for now
-    const existingScores = JSON.parse(localStorage.getItem("levelScores") || "{}")
-    existingScores["level5"] = { score, timeBonus }
-    localStorage.setItem("levelScores", JSON.stringify(existingScores))
+    const existingScores = JSON.parse(
+      localStorage.getItem("levelScores") || "{}"
+    );
+    existingScores["level5"] = { score, timeBonus };
+    localStorage.setItem("levelScores", JSON.stringify(existingScores));
 
     // Navigate to Level 6 (Bonus Level)
-    router.push("/quiz/level-6")
-  }
+    router.push("/quiz/level-6");
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-12">
@@ -30,12 +32,21 @@ export default function Level5Page() {
             <Leaf className="h-4 w-4" />
             <span>NATURE NEXUS 2.0</span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground">Level 5: True/False + Explanation</h1>
-          <p className="mt-2 text-muted-foreground">Justify your answers with reasoning</p>
+          <h1 className="text-3xl font-bold text-foreground">
+            Level 5: True/False + Explanation
+          </h1>
+          <p className="mt-2 text-muted-foreground">
+            Justify your answers with reasoning
+          </p>
         </div>
 
-        <QuizEngine levelNumber={5} questions={level5Questions} timeLimit={720} onComplete={handleComplete} />
+        <QuizEngine
+          levelNumber={5}
+          questions={level5Questions}
+          timeLimit={1800}
+          onComplete={handleComplete}
+        />
       </div>
     </main>
-  )
+  );
 }

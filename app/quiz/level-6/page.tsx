@@ -175,7 +175,7 @@ export default function Level6Page() {
                         );
                       }}
                     >
-                      {completedTasks.facebook ? "Liked" : "Like Now"}
+                      {completedTasks.facebook ? "Followed" : "Follow Now"}
                     </Button>
                   </div>
                 </div>

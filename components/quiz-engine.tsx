@@ -5,11 +5,15 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Clock, ChevronRight } from "lucide-react";
+import { Clock, ChevronRight, Loader2 } from "lucide-react";
 import { AntiCheatMonitor } from "@/components/anti-cheat-monitor";
 
-// 🔥 Firebase helper
+// 🔥 Firebase
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { saveLevelScore } from "@/lib/score";
+
+// ---------------- TYPES ----------------
 
 export interface QuizQuestion {
   id: string;
@@ -18,7 +22,6 @@ export interface QuizQuestion {
   correctAnswer: number | number[];
   points: number;
   imageUrl?: string;
-  explanation?: string;
 }
 
 interface QuizEngineProps {
@@ -41,6 +44,8 @@ export interface QuizEngineRenderProps {
   score: number;
 }
 
+// ---------------- ENGINE ----------------
+
 export function QuizEngine({
   levelNumber,
   questions,
@@ -51,14 +56,32 @@ export function QuizEngine({
   const uid =
     typeof window !== "undefined" ? localStorage.getItem("uid") : null;
 
+  const isRapidRound = levelNumber === 4;
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<
     number | number[] | null
   >(null);
   const [score, setScore] = useState(0);
-  const [timeRemaining, setTimeRemaining] = useState(timeLimit);
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
-  const [startTime] = useState(Date.now());
+
+  // ⬆️ Auto scroll to top when question changes
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [currentQuestionIndex]);
+
+  // ⏱ GLOBAL QUIZ TIMER (normal rounds)
+  const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
+
+  // ⚡ RAPID ROUND TIMER (local only)
+  const [rapidStartTime] = useState<number | null>(
+    isRapidRound ? Date.now() : null
+  );
+
+  const [timeRemaining, setTimeRemaining] = useState(timeLimit);
 
   // 🔒 Guard access
   useEffect(() => {
@@ -67,24 +90,59 @@ export function QuizEngine({
     }
   }, [uid]);
 
-  const currentQuestion = questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-
-  // ⏱ Timer
+  // 🔥 Load global quiz start time (for non-rapid rounds)
   useEffect(() => {
-    if (timeRemaining <= 0) {
-      handleAutoSubmit();
-      return;
+    if (isRapidRound) return;
+
+    const loadStartTime = async () => {
+      if (!uid) return;
+
+      const snap = await getDoc(doc(db, "users", uid));
+      if (!snap.exists()) return;
+
+      const data = snap.data();
+      if (data.quizStartTime) {
+        setQuizStartTime(data.quizStartTime.toMillis());
+      }
+    };
+
+    loadStartTime();
+  }, [uid, isRapidRound]);
+
+  // ⏱ Calculate remaining time
+  const getRemainingTime = () => {
+    // ⚡ RAPID ROUND (custom timer)
+    if (isRapidRound && rapidStartTime) {
+      const elapsed = Math.floor((Date.now() - rapidStartTime) / 1000);
+      return Math.max(timeLimit - elapsed, 0);
     }
 
+    // ⏳ NORMAL ROUNDS (global timer)
+    if (!quizStartTime) return timeLimit;
+
+    const elapsed = Math.floor((Date.now() - quizStartTime) / 1000);
+    return Math.max(timeLimit - elapsed, 0);
+  };
+
+  // ⏲ Timer loop
+  useEffect(() => {
     const timer = setInterval(() => {
-      setTimeRemaining((prev) => prev - 1);
+      const remaining = getRemainingTime();
+      setTimeRemaining(remaining);
+
+      if (remaining === 0) {
+        clearInterval(timer);
+        handleAutoSubmit();
+      }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeRemaining]);
+  }, [quizStartTime, rapidStartTime]);
 
-  // ✅ Answer check
+  const currentQuestion = questions[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+
+  // ✅ Check answer
   const checkAnswer = () => {
     if (selectedAnswer === null) return false;
 
@@ -106,9 +164,7 @@ export function QuizEngine({
     const isCorrect = checkAnswer();
     const earned = isCorrect ? currentQuestion.points : 0;
 
-    if (isCorrect) {
-      setScore((prev) => prev + earned);
-    }
+    if (isCorrect) setScore((prev) => prev + earned);
 
     setIsAnswerSubmitted(true);
 
@@ -118,10 +174,8 @@ export function QuizEngine({
         setSelectedAnswer(null);
         setIsAnswerSubmitted(false);
       } else {
-        const endTime = Date.now();
-        const timeTaken = Math.floor((endTime - startTime) / 1000);
-
         const finalScore = score + earned;
+        const timeTaken = timeLimit - timeRemaining;
 
         if (uid) {
           await saveLevelScore(uid, levelNumber, finalScore, timeTaken);
@@ -129,13 +183,12 @@ export function QuizEngine({
 
         onComplete(finalScore, timeTaken);
       }
-    }, 1200);
+    }, 1000);
   };
 
-  // ⏰ Auto submit
+  // ⛔ Auto submit on timeout
   const handleAutoSubmit = async () => {
-    const endTime = Date.now();
-    const timeTaken = Math.floor((endTime - startTime) / 1000);
+    const timeTaken = timeLimit - timeRemaining;
 
     if (uid) {
       await saveLevelScore(uid, levelNumber, score, timeTaken);
@@ -165,7 +218,7 @@ export function QuizEngine({
   return (
     <>
       <AntiCheatMonitor
-        enabled={true}
+        enabled
         maxViolations={3}
         onDisqualify={() => (window.location.href = "/")}
       />
@@ -175,7 +228,10 @@ export function QuizEngine({
         <div className="mb-6">
           <div className="mb-4 flex justify-between">
             <div>
-              <h2 className="text-2xl font-bold">Level {levelNumber}</h2>
+              <h2 className="text-2xl font-bold">
+                Level {levelNumber}
+                {isRapidRound && " ⚡ Rapid"}
+              </h2>
               <p className="text-sm text-muted-foreground">
                 Question {currentQuestionIndex + 1} of {questions.length}
               </p>
@@ -218,6 +274,7 @@ function DefaultQuestionRenderer({
           <div className="mb-4 inline-flex rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
             Level {levelNumber} – Question {currentQuestionIndex + 1}
           </div>
+
           <h3 className="mb-4 text-xl font-semibold">
             {currentQuestion.question}
           </h3>
@@ -251,11 +308,14 @@ function DefaultQuestionRenderer({
         <Button
           onClick={onSubmitAnswer}
           disabled={selectedAnswer === null || isAnswerSubmitted}
-          className="w-full"
+          className="w-full flex items-center justify-center gap-2"
           size="lg"
         >
           {isAnswerSubmitted ? (
-            "Loading..."
+            <>
+              <Loader2 className="h-5 w-5 animate-spin" />
+              Submitting...
+            </>
           ) : (
             <>
               Submit Answer

@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { Leaf, Clock, AlertTriangle, Trophy, Target, Zap } from "lucide-react";
 
-// 🔥 Firebase
+// Firebase
 import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -47,7 +47,7 @@ export default function InstructionsPage() {
 
         setParticipantName(userData.fullName);
 
-        // 🚫 Block re-entry if quiz already started
+        // Block re-entry if quiz already started
         if (userData.quizStarted && !userData.quizCompleted) {
           router.push("/quiz/level-1");
         }
