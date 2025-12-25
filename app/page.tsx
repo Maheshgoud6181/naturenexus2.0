@@ -148,7 +148,7 @@ export default function HomePage() {
                 <h3 className="mb-2 text-xl font-semibold text-card-foreground">
                   Duration
                 </h3>
-                <p className="text-muted-foreground">2 Hours</p>
+                <p className="text-muted-foreground">30 Minutes</p>
               </CardContent>
             </Card>
 
@@ -327,7 +327,7 @@ export default function HomePage() {
               <ul className="space-y-4">
                 {[
                   "Complete registration before starting the quiz",
-                  "You have 2 hours total to complete all 6 levels",
+                  "You have 30 Minutes total to complete all 6 levels",
                   "No back navigation - answers are final once submitted",
                   "Tab switching or page refresh may result in warnings/disqualification",
                   "Points are awarded for correct answers and speed bonuses",

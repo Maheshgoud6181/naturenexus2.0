@@ -173,7 +173,7 @@ export default function InstructionsPage() {
                 <InfoItem
                   icon={<Clock />}
                   title="Duration"
-                  desc="2 hours total for all levels"
+                  desc="30 Minutes total for all levels"
                 />
                 <InfoItem
                   icon={<Target />}

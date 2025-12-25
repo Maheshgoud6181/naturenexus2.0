@@ -51,95 +51,123 @@ export const level2Questions: QuizQuestion[] = [
   {
     id: "l2-q1",
     question:
-      "A city plans to build a new industrial zone near a wetland that supports 50+ bird species. What should be the priority action?",
+      "A village depends on groundwater, but water levels drop every year. Which action best supports long-term water availability?",
     options: [
-      "Proceed immediately to boost economy",
-      "Conduct Environmental Impact Assessment first",
-      "Relocate the birds to another area",
-      "Build a wall around the wetland",
+      "Capture rainfall locally and control extraction",
+      "Drill deeper and more powerful wells",
+      "Restrict water use to specific hours",
+      "Transport water from nearby regions",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     points: 15,
   },
   {
     id: "l2-q2",
     question:
-      "A farmer notices declining crop yields and increasing pest problems. Soil tests show low organic content. What's the most sustainable solution?",
+      "A road is planned through a forested region. What approach best balances development and ecological protection?",
     options: [
-      "Use more chemical fertilizers and pesticides",
-      "Implement crop rotation and composting",
-      "Switch to monoculture farming",
-      "Increase irrigation frequency",
+      "Design crossings for animals and restore green cover elsewhere",
+      "Move wildlife to controlled areas",
+      "Proceed without environmental changes",
+      "Stop all construction activities",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     points: 15,
   },
   {
     id: "l2-q3",
     question:
-      "A coastal village faces regular flooding due to rising sea levels. What is the most effective long-term adaptation strategy?",
+      "A city’s landfill sites are nearing capacity. What strategy addresses the root cause of the problem?",
     options: [
-      "Build higher walls",
-      "Restore mangrove forests and wetlands",
-      "Relocate inland immediately",
-      "Install water pumps",
+      "Transfer waste to nearby regions",
+      "Reduce waste through segregation and recycling",
+      "Identify new dumping areas",
+      "Dispose waste through burning",
     ],
     correctAnswer: 1,
     points: 15,
   },
   {
     id: "l2-q4",
-    question: "A company wants to reduce its carbon footprint. Which combination would be most effective?",
+    question:
+      "Fish populations near a coastal town are steadily declining. What response supports long-term fishing livelihoods?",
     options: [
-      "Use renewable energy + reduce waste + optimize transport",
-      "Only switch to LED lights",
-      "Plant trees but continue current operations",
-      "Buy carbon credits without changing operations",
+      "Upgrade fishing equipment",
+      "Change fishing locations frequently",
+      "Regulate fishing and protect breeding cycles",
+      "Increase fishing effort during peak seasons",
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
+    points: 15,
+  },
+  {
+    id: "l2-q5",
+    question:
+      "A town records unusually high temperatures every summer. Which solution targets the underlying cause?",
+    options: [
+      "Modify road surfaces",
+      "Expand green cover using region-appropriate plants",
+      "Increase indoor cooling systems",
+      "Remove old vegetation",
+    ],
+    correctAnswer: 1,
     points: 15,
   },
 ]
+
 
 // LEVEL 3: Match & Sequence (represented as multiple choice for now)
 export const level3Questions: QuizQuestion[] = [
   {
     id: "l3-q1",
-    question: "Arrange the following in the correct order of the water cycle:",
+    question: "Arrange the following in the correct order of the carbon cycle in nature:",
     options: [
-      "Evaporation → Condensation → Precipitation → Collection",
-      "Condensation → Evaporation → Collection → Precipitation",
-      "Precipitation → Evaporation → Condensation → Collection",
-      "Collection → Precipitation → Evaporation → Condensation",
+      "Animals → Plants → CO₂ → Decomposition → Atmosphere",
+      "Atmospheric CO₂ → Plants → Animals → Decomposition → CO₂ release",
+      "CO₂ → Decomposition → Plants → Animals → Atmosphere",
+      "Plants → CO₂ → Animals → Atmosphere → Decomposition",
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     points: 20,
   },
   {
     id: "l3-q2",
-    question: "Match the correct food chain sequence in a grassland ecosystem:",
+    question: "Match the correct sequence of energy flow in an aquatic ecosystem:",
     options: [
-      "Grass → Grasshopper → Frog → Snake → Hawk",
-      "Hawk → Snake → Frog → Grasshopper → Grass",
-      "Grasshopper → Grass → Frog → Snake → Hawk",
-      "Snake → Hawk → Frog → Grass → Grasshopper",
+      "Large fish → Small fish → Phytoplankton → Sun",
+      "Sun → Fish → Phytoplankton → Humans",
+      "Sun → Phytoplankton → Small fish → Large fish → Humans",
+      "Humans → Large fish → Small fish → Phytoplankton → Sun",
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     points: 20,
   },
   {
     id: "l3-q3",
-    question: "Arrange these renewable energy sources by global installed capacity (highest to lowest):",
+    question: "Arrange the stages of soil formation from bare rock to fertile soil:",
     options: [
-      "Hydroelectric → Wind → Solar → Geothermal",
-      "Solar → Wind → Hydroelectric → Geothermal",
-      "Wind → Solar → Hydroelectric → Geothermal",
-      "Geothermal → Solar → Wind → Hydroelectric",
+      "Weathering → Organic matter → Rock → Soil",
+      "Rock → Weathering → Soil particles → Organic matter → Fertile soil",
+      "Soil → Rock → Organic matter → Weathering",
+      "Organic matter → Rock → Weathering → Soil",
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
+    points: 20,
+  },
+  {
+    id: "l3-q4",
+    question: "Arrange the steps showing how solar energy becomes usable electricity:",
+    options: [
+      "Electricity → Sunlight → Panel → Usage",
+      "Usage → Panel → Sunlight → Electricity",
+      "Sunlight → Solar panel → Electricity → Usage",
+      "Solar panel → Usage → Sunlight → Electricity",
+    ],
+    correctAnswer: 2,
     points: 20,
   },
 ]
+
 
 // LEVEL 4: Rapid Response
 export const level4Questions: QuizQuestion[] = [
