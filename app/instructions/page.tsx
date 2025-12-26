@@ -124,6 +124,8 @@ export default function InstructionsPage() {
       return;
     }
 
+    
+
     setIsStarting(true);
 
     try {
