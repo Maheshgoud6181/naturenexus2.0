@@ -360,10 +360,10 @@ export default function HomePage() {
       <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-16 md:py-24">
         <div className="container mx-auto px-4 text-center animate-on-scroll">
           <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-            Ready to Test Your Knowledge?
+            QUIZ ENDED , STAY TUNED FOR NEXT EDITION!
           </h2>
           <p className="mb-8 text-lg text-muted-foreground">
-            QUIZ ENDED , STAY TUNED FOR NEXT EDITION!
+            Thank You for Participating! Keep Exploring and Protecting Nature.
           </p>
           {/* <Link href="/register">
             <Button
