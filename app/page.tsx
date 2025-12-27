@@ -88,7 +88,7 @@ export default function HomePage() {
               className="flex flex-col items-center justify-center gap-4 sm:flex-row animate-slide-up"
               style={{ animationDelay: "0.2s" }}
             >
-              <Link href="/register">
+              {/* <Link href="/register">
                 <Button
                   size="lg"
                   disabled
@@ -97,7 +97,7 @@ export default function HomePage() {
                   Start Quiz
                   <Sparkles className="ml-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 </Button>
-              </Link>
+              </Link> */}
               <Link href="/leaderboard">
                 <Button
                   size="lg"
@@ -363,9 +363,9 @@ export default function HomePage() {
             Ready to Test Your Knowledge?
           </h2>
           <p className="mb-8 text-lg text-muted-foreground">
-            Register now and compete for the top spot!
+            QUIZ ENDED , STAY TUNED FOR NEXT EDITION!
           </p>
-          <Link href="/register">
+          {/* <Link href="/register">
             <Button
               size="lg"
               disabled
@@ -374,7 +374,7 @@ export default function HomePage() {
               Register Now
               <Sparkles className="ml-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </section>
 
