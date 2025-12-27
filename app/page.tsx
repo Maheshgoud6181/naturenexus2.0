@@ -74,7 +74,7 @@ export default function HomePage() {
             </div>
 
             <h1 className="mb-6 text-balance text-5xl font-bold tracking-tight text-foreground md:text-7xl animate-slide-up">
-              NATURE NEXUS 2.0
+              ⏰ Quiz Ended! at 9 PM.
             </h1>
 
             <p
