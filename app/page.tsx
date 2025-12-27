@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Leaf, Trophy, Clock, Target, Sparkles, Users } from "lucide-react";
+import { db } from "@/lib/firebase";
 
 export default function HomePage() {
   const [scrollY, setScrollY] = useState(0);
@@ -90,6 +91,7 @@ export default function HomePage() {
               <Link href="/register">
                 <Button
                   size="lg"
+                  disabled
                   className="h-12 px-8 text-base font-semibold group hover:scale-105 transition-transform"
                 >
                   Start Quiz
@@ -366,6 +368,7 @@ export default function HomePage() {
           <Link href="/register">
             <Button
               size="lg"
+              disabled
               className="h-14 px-10 text-lg font-semibold group hover:scale-105 transition-transform"
             >
               Register Now

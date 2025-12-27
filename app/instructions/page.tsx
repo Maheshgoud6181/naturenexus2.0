@@ -124,8 +124,11 @@ export default function InstructionsPage() {
       return;
     }
 
-    
-
+     // 🔥 RESET OLD QUIZ DATA (CRITICAL FIX)
+  localStorage.removeItem("levelScores");
+  localStorage.removeItem("quizCompleted");
+  localStorage.removeItem("quizStartTime");
+  localStorage.removeItem("levelStartTime");
     setIsStarting(true);
 
     try {
